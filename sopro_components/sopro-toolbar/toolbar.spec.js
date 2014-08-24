@@ -1,0 +1,2 @@
+describe('soproToolbar directive', function() {
+});

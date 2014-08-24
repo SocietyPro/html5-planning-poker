@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>  
+    <script src="bower_components/platform/platform.js"></script>
+    <script src="js/angular.js" type="text/javascript"></script>
+    <script src="js/angular-route.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+    
+    <link rel="import" href="bower_components/font-roboto/roboto.html">
+    <link rel="import" href="sopro_components/core-scaffold/core-scaffold.html">
+    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="bower_components/core-menu/core-menu.html">
+    <link rel="import" href="bower_components/core-item/core-item.html">
+    <link rel="import" href="sopro_services/pivotal-service.html">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+  </head>
+  <body ng-controller="appCtrl">
+    <div id="applicationContainer">
+      <core-scaffold id="groupScaffold" narrow="true">
+        <core-header-panel navigation flex mode="seemed">
+          <core-toolbar hidden></core-toolbar>
+          <core-menu theme="core-light-theme">
+            <core-item icon="settings" label="{{project.name}}"></core-item>
+          </core-menu>
+        </core-header-panel>
+        <div class="mainTitle" tool>
+            SocietyPro Planning Poker
+        </div>
+        <div id="listMorphButtons" tool horizontal layout>
+          <core-icon-button id="listButton" icon="view-stream"></core-icon-button>
+          <core-icon-button id="gridButton" icon="view-quilt"></core-icon-button>
+        </div>
+        
+        <pivotal-service id="serviceCall" projects="{{projects}}">
+            </pivotal-service>
+            <div>Some content...</div>
+            <div>{{projects}}</div>
+            <template>
+              {{projects}}
+              <template repeat="{{project in projects}}">
+                <p>{{project.name}}</p>
+              </template>
+            </template>
+
+
+
+      </core-scaffold>
+    </div>
+  </body>
+  <script>
+    document.addEventListener('polymer-ready', function () {
+      document.getElementById('groupScaffold').closeDrawer();
+    });
+  </script>
+</html>

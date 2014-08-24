@@ -1,0 +1,27 @@
+sopro-content,
+.sopro-content {
+  display: block;
+
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &[scroll-y] {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  &[scroll-x] {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  &[scroll-xy] {
+  }
+
+  &.sopro-content-padding {
+    padding: 20px;
+  }
+
+  > .sopro-content {
+    height: 100%;
+    width: 100%;
+  }
+}

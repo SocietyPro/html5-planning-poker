@@ -1,0 +1,12 @@
+#titleText {
+  float: left;
+  vertical-align: middle;
+}
+
+#listMorphButtons {
+  float: right;
+}
+
+.mainTitle {
+  width: 100%;
+}

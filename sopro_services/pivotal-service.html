@@ -1,0 +1,44 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="pivotal-service" attributes="stories projects">
+  <template>
+    <style>
+    :host {
+      display: none;
+    }
+    </style>
+    <core-ajax id="projects"
+      auto
+      url="https://www.pivotaltracker.com/services/v5/projects"
+      headers='{"X-TrackerToken": "2d20dce7ddb7d7ba70419aa15740b0f5"}'
+      on-core-response="{{projectsLoaded}}"
+      handleAs="json">
+    </core-ajax>
+    <!-- <core-ajax id="stories"
+      auto
+      url="https://www.pivotaltracker.com/services/v5/projects/1113976/stories?with_state=unstarted"
+      headers='{"X-TrackerToken": "2d20dce7ddb7d7ba70419aa15740b0f5"}'
+      on-core-response="{{storiesLoaded}}"
+      handleAs="json">
+    </core-ajax> -->
+  </template>
+
+  <script>
+    Polymer('pivotal-service', {
+      created: function () {
+        this.projects = [];
+        this.stories = [];
+      },
+      storiesLoaded: function () {
+        console.log(this.$.ajax.response);
+        this.stories = this.$.ajax.response.slice(0);
+      },
+      projectsLoaded: function () {
+        console.log("ajax response: " + this.$.projects.response);
+        this.projects = this.$.projects.response.slice(0);
+        console.log("service projects: " + this.projects);
+      }
+    });
+  </script>
+</polymer-element>

@@ -1,0 +1,69 @@
+
+<div ng-app="app" ng-controller="AppCtrl">
+
+  <sopro-content>
+
+    <sopro-toolbar class="sopro-theme-light">
+      <h1 class="sopro-toolbar-tools">
+        <span>Toolbar: light-theme (default)</span>
+      </h1>
+    </sopro-toolbar>
+
+    <br>
+
+    <sopro-toolbar class="sopro-theme-dark">
+      <h1 class="sopro-toolbar-tools">
+        <span>Toolbar: dark-theme</span>
+      </h1>
+    </sopro-toolbar>
+
+    <br>
+
+    <sopro-toolbar class="sopro-theme-green sopro-tall">
+      <h1 class="sopro-toolbar-tools">
+        <span>Toolbar: tall</span>
+      </h1>
+    </sopro-toolbar>
+
+    <br>
+
+    <sopro-toolbar class="sopro-theme-yellow sopro-tall">
+      <span flex></span>
+      <h1 class="sopro-toolbar-tools sopro-toolbar-tools-bottom">
+        <span class="sopro-flex">Toolbar: tall with actions pin to the bottom</span>
+      </h1>
+    </sopro-toolbar>
+
+    <br>
+
+    <sopro-toolbar class="sopro-theme-orange sopro-medium-tall">
+      <h1 class="sopro-toolbar-tools sopro-toolbar-tools-top">
+        <sopro-icon style="width: 24px; height: 24px;">
+          <svg-icon></svg-icon>
+        </sopro-icon>
+      </h1>
+      <span flex></span>
+      <h1 class="sopro-toolbar-tools sopro-toolbar-tools-bottom">
+        <span>Toolbar: medium tall with label aligns to the bottom</span>
+      </h1>
+    </sopro-toolbar>
+
+    <br>
+
+    <sopro-toolbar class="sopro-theme-purple sopro-tall">
+      <h1 class="sopro-toolbar-tools sopro-toolbar-tools-top">
+        <sopro-icon style="width: 24px; height: 24px;">
+          <svg-icon></svg-icon>
+        </sopro-icon>
+      </h1>
+      <h1 class="sopro-toolbar-tools" layout-arrange="center center">
+        <span>Toolbar: label aligns to the middle</span>
+      </h1>
+      <span flex></span>
+      <h1 class="sopro-toolbar-tools">
+        <div style="font-size: 18px">Some stuff aligns to the bottom</div>
+      </h1>
+    </sopro-toolbar>
+
+  </sopro-content>
+</div>

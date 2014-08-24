@@ -1,0 +1,30 @@
+<div ng-app="myApp" ng-controller="AppCtrl" layout="vertical" layout-fill>
+
+  <sopro-toolbar scroll-shrink class="sopro-theme-light">
+    <div class="sopro-toolbar-tools">
+      <span>My App Title</span>
+    </div>
+  </sopro-toolbar>
+
+  <sopro-content>
+
+    <sopro-list>
+
+      <sopro-item ng-repeat="item in todos">
+        <div class="sopro-tile-left">
+          <img ng-src="{{item.face}}" class="face">
+        </div>
+        <div class="sopro-tile-content">
+          <h2>{{item.what}}</h2>
+          <h3>{{item.who}}</h3>
+          <p>
+            {{item.notes}}
+          </p>
+        </div>
+      </sopro-item>
+
+    </sopro-list>
+
+  </sopro-content>
+
+</div>
