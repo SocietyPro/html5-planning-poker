@@ -11,17 +11,10 @@
     <core-ajax id="projects"
       auto
       url="https://www.pivotaltracker.com/services/v5/projects"
-      headers='{"X-TrackerToken": "2d20dce7ddb7d7ba70419aa15740b0f5"}'
+      headers='{"X-TrackerToken": "' + token + "}'
       on-core-response="{{projectsLoaded}}"
       handleAs="json">
     </core-ajax>
-    <!-- <core-ajax id="stories"
-      auto
-      url="https://www.pivotaltracker.com/services/v5/projects/1113976/stories?with_state=unstarted"
-      headers='{"X-TrackerToken": "2d20dce7ddb7d7ba70419aa15740b0f5"}'
-      on-core-response="{{storiesLoaded}}"
-      handleAs="json">
-    </core-ajax> -->
   </template>
 
   <script>

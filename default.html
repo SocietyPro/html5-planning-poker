@@ -41,9 +41,9 @@
               <material-icon icon="assets/images/ic_menu_24px.svg"></material-icon>
             </div>
             <h2 hide block-sm>{{menu.currentSection.name}}</h2>
-        <span layout="vertical" layout-align="center center" class="menu-separator-icon">
-          <img style="height: 16px;" src="assets/images/docArrow.png" hide block-sm>
-        </span>
+            <span layout="vertical" layout-align="center center" class="menu-separator-icon" ng-show="menu.currentPage">
+              <img style="height: 16px;" src="assets/images/docArrow.png" hide block-sm>
+            </span>
             <h3 ng-bind="menu.currentPage.humanName || menu.currentPage.name || 'Stories'"></h3>
           </div>
         </material-toolbar>

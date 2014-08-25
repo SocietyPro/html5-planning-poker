@@ -48,7 +48,7 @@ appModule = angular.module("app", ['ngMaterial', 'ngRoute', 'ngResource'])
         });
       });
       if (!activated) {
-        self.selectSection(sections[2]);
+        self.selectSection(sections[0]);
       }
     }
   }
@@ -57,23 +57,27 @@ appModule = angular.module("app", ['ngMaterial', 'ngRoute', 'ngResource'])
 
   $scope.menu = menu;
 
-  var token = "2d20dce7ddb7d7ba70419aa15740b0f5"
-  $http.get("https://www.pivotaltracker.com/services/v5/projects", {
-    headers: {"X-TrackerToken": token}
-  }).success(function (data, status, headers, config) {
-    for (var i = 0; i < data.length; i++) {
-      var section = sections[0];
-      section.pages[i] = {
-        name: data[i].name,
-        id: data[i].name,
-        url: "projects/" + data[i].name
-      }
-    }
-    $scope.menu.sections = sections;
-  });
+  var token;
+  $http.get('js/token.json')
+    .success(function (data) {
+      token = data[0].token;
 
-  
-  
+      $http.get("https://www.pivotaltracker.com/services/v5/projects", {
+        headers: {"X-TrackerToken": token}
+      }).success(function (data, status, headers, config) {
+        for (var i = 0; i < data.length; i++) {
+          var section = sections[0];
+          section.pages[i] = {
+            name: data[i].name,
+            id: data[i].name,
+            url: "projects/" + data[i].name
+          }
+        }
+        $scope.menu.sections = sections;
+      });
+    
+    });
+
   $scope.toggleMenu = function () {
     $materialSidenav('left').toggle();
   };
