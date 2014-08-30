@@ -7,7 +7,7 @@ git clone git@github.com:SocietyPro/html5-planning-poker.git
 npm install  
 bower install  
 
-echo '[{"token": "YOUR PIVOTAL API TOKEN"}]' > js/token.json  
+echo '[{"token": "YOUR PIVOTAL TRACKER API TOKEN"}]' > js/token.json  
 
 npm start  
 
