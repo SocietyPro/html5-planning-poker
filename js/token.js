@@ -1,0 +1,1 @@
+var PokerPlanningToken = [{"token": "YOUR_PIVOTAL_TRACKER_API_TOKEN"}];
