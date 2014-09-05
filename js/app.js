@@ -1,63 +1,36 @@
-var sections = [{
-  name: 'Projects',
-  pages: []
-}];
+var token;
 
-appModule = angular.module("app", ['ngMaterial', 'ngRoute', 'ngResource'])
+appModule = angular.module("app", ['ngMaterial', 'ngResource'])
 .factory('menu', [
   '$location',
   '$rootScope',
-  function($location, $rootScope) {
+  '$http',
+  function($location, $rootScope, $http) {
 
     var self;
 
-    $rootScope.$on('$locationChangeSuccess', onLocationChange);
-
     return self = {
 
-      selectSection: function(section) {
-        self.openedSection = section;
+      selectProject: function(project) {
+        self.currentProject = project;
+        var projectId = project.id;
+        $http.get("https://www.pivotaltracker.com/services/v5/projects/" + projectId + "/stories", {
+          headers: {"X-TrackerToken": token}
+        }).success(function (data, status, headers, config) {
+          $rootScope.stories = data;
+        });
       },
-      toggleSelectSection: function(section) {
-        self.openedSection = (self.openedSection === section ? null : section);
-      },
-      isSectionSelected: function(section) {
-        return self.openedSection === section;
-      },
-
-      selectPage: function(section, page) {
-        page && page.url && $location.path(page.url);
-        self.currentSection = section;
-        self.currentPage = page;
-      },
-      isPageSelected: function(section, page) {
-        return self.currentPage === page;
+      isProjectSelected: function(project) {
+        return self.currentProject === project;
       }
     };
 
-    function onLocationChange() {
-      var activated = false;
-      var path = $location.path();
-      sections.forEach(function(section) {
-        section.pages.forEach(function(page) {
-          if (path === page.url) {
-            self.selectSection(section);
-            self.selectPage(section, page);
-            activated = true;
-          }
-        });
-      });
-      if (!activated) {
-        self.selectSection(sections[0]);
-      }
-    }
   }
 ])
-.controller("appCtrl", function ($scope, $http, $resource, $materialSidenav, menu) {
+.controller("appCtrl", function ($scope, $http, $resource, $materialSidenav, $materialDialog, menu) {
 
   $scope.menu = menu;
 
-  var token;
   $http.get('js/token.json')
     .success(function (data) {
       token = data[0].token;
@@ -65,21 +38,28 @@ appModule = angular.module("app", ['ngMaterial', 'ngRoute', 'ngResource'])
       $http.get("https://www.pivotaltracker.com/services/v5/projects", {
         headers: {"X-TrackerToken": token}
       }).success(function (data, status, headers, config) {
-        for (var i = 0; i < data.length; i++) {
-          var section = sections[0];
-          section.pages[i] = {
-            name: data[i].name,
-            id: data[i].name,
-            url: "projects/" + data[i].name
-          }
-        }
-        $scope.menu.sections = sections;
+        $scope.menu.projects = data;
+        $scope.menu.selectProject(menu.projects[0]);
       });
     
     });
 
   $scope.toggleMenu = function () {
     $materialSidenav('left').toggle();
+  };
+
+  $scope.dialog = function (e, story) {
+    $materialDialog({
+      templateUrl: 'partials/storyCard.tmpl.html',
+      targetEvent: e,
+      controller: ['$scope', '$hideDialog', function ($scope, $hideDialog) {
+        $scope.story = story;
+        $scope.close = function () {
+          $hideDialog();
+        };
+
+      }]
+    });
   };
 
 });

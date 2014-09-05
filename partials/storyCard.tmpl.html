@@ -1,0 +1,19 @@
+<material-dialog>
+  <div class="dialog-content">
+    <div ng-show="story.current_state === 'accepted'">
+      Accepted: {{story.accepted_at}}
+    </div>
+    <h3>{{story.name}}</h3>
+    <p>
+      <pre>{{story.description}}</pre>
+    </p>
+    <p>
+      {{story}}
+    </p>
+  </div>
+  <div class="dialog-actions" layout="horizontal" layout-end="end">
+    <material-button ng-click="close()">
+      Close
+    </material-button>
+  </div>
+</material-dialog>

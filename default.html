@@ -20,18 +20,10 @@
           <h1 class="material-toolbar-tools">Poker Planning</h1>
           <span flex></span>
         </material-toolbar>
-        <material-content flex>
-          <div ng-repeat="section in menu.sections">
-            <button class="menu-item menu-title" ng-class="{active: menu.isSectionSelected(section)}" ng-click="menu.toggleSelectSection(section)">
-              {{section.name}}
-              <material-ripple initial-opacity="0.4" opacity-decay-velocity="1.75"></material-ripple>
-            </button>
-            <button class="menu-item menu-sub-item" ng-show="menu.isSectionSelected(section)" ng-repeat="page in section.pages" ng-class="{active: menu.isPageSelected(section, page)}" ng-click="menu.selectPage(section, page); $event.stopImmediatePropagation()">
-              <span ng-bind="page.humanName || page.name"></span>
-              <material-ripple initial-opacity="0.4" opacity-decay-velocity="1.75"></material-ripple>
-            </button>
-          </div>
-        </material-content>
+          <button class="menu-item menu-sub-item" ng-repeat="project in menu.projects" ng-class="{active: menu.isProjectSelected(project)}" ng-click="menu.selectProject(project); $event.stopImmediatePropagation()">
+            <span ng-bind="project.name"></span>
+            <material-ripple initial-opacity="0.4" opacity-decay-velocity="1.75"></material-ripple>
+          </button>
       </material-sidenav>
 
       <div layout="vertical" layout-fill>
@@ -47,8 +39,22 @@
             <h3 ng-bind="menu.currentPage.humanName || menu.currentPage.name || 'Stories'"></h3>
           </div>
         </material-toolbar>
-        <material-content class="material-content-padding">
-          <h2>This is where content goes</h2>
+        <material-content id="mainContentContainer" class="material-content-padding" scroll-y flex>
+          <material-card class="projectCard" ng-repeat="story in stories" ng-class="{red: story.story_type === 'bug', green: story.story_type === 'feature', yellow: story.story_type === 'chore'}">
+            <div class="storyCardContent" ng-click="dialog($event, story)">
+              <div class="cardInfoBar">
+                <span class="storyType">{{story.current_state}}</span>
+                <span class="storyEstimate" ng-show="story.estimate">Estimate: {{story.estimate}}</span>
+              </div>
+              <div class="clearBoth"></div>
+              <h3>{{story.name}}</h3>
+            </div>
+            <div class="storyCardMenuBar">
+              <material-button class="material-button-icon overflowMenuButton" ng-click="overflowToggle()">
+                <img class="overflowMenuIcon" ng-src="assets/icons/ic_drawer_wht_18dp.png">
+              </material-button>
+            </div>
+          </material-card>
         </material-content>
       </div>
 
