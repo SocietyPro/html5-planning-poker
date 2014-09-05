@@ -1,4 +1,4 @@
-var token;
+var token = PokerPlanningToken;
 
 appModule = angular.module("app", ['ngMaterial', 'ngResource'])
 .factory('menu', [
@@ -30,10 +30,13 @@ appModule = angular.module("app", ['ngMaterial', 'ngResource'])
 .controller("appCtrl", function ($scope, $http, $resource, $materialSidenav, $materialDialog, menu) {
 
   $scope.menu = menu;
-
-  $http.get('js/token.json')
+  
+  /*
+  $http.get('js/token.json?callback=JSON_CALLBACK')
     .success(function (data) {
       token = data[0].token;
+  */
+      
 
       $http.get("https://www.pivotaltracker.com/services/v5/projects", {
         headers: {"X-TrackerToken": token}
@@ -42,7 +45,7 @@ appModule = angular.module("app", ['ngMaterial', 'ngResource'])
         $scope.menu.selectProject(menu.projects[0]);
       });
     
-    });
+    //});
 
   $scope.toggleMenu = function () {
     $materialSidenav('left').toggle();
